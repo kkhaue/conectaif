@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+
+{% block sub_header %}
+
+<style>
+  #imgpos{
+    max-width: 27%;
+    height: auto;
+  }
+
+  .imgpos{
+        display: none;
+      }
+
+  @media(min-width: 498px)
+  {
+    .imgpos{
+      display: block;
+      }
+  }
+</style>
+
+<div class="jumbotron p-3 p-md-5 text-white rounded bg-success">
+    <img id="imgpos" class="imgpos rounded" src="https://cdn.discordapp.com/attachments/565277179412348933/1033490800555851947/campus1.png"/ align="right">
+    <div class="col-md-6 px-0">
+      <h2 class="display-7 font-italic">Bem-Vindo ao Jornal Do Campus!</h2>
+      <p class="lead my-3">Confira as notícias relacionadas à instiruição =)</p>
+      <p class="lead mb-2"><a href="#" class="text-white font-weight-bold">Continue lendo...</a></p>
+    </div>
+  </div> 
+
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+        <div class="card-body d-flex flex-column align-items-start">
+          <strong class="d-inline-block mb-2 text-warning">Olimpíadas</strong>
+          <h3 class="mb-0">
+            <a class="text-dark" href="#">ONHB</a>
+          </h3>
+          <div class="mb-1 text-muted">12 de Out</div>
+          <p class="card-text mb-auto">ESTUDANTES DE CAPANEMA RECEBEM MEDALHA DE OURO E REPRESENTARÃO O ESTADO NA FINAL DA OLIMPÍADA BRASILEIRA DE GEOGRAFIA E CIÊNCIAS DA TERRA.</p>
+          <a href="#">Continue lendo</a>
+        </div>
+        <img class="card-img-right flex-auto d-none d-lg-block" data-src="holder.js/200x250?theme=thumb">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+        <div class="card-body d-flex flex-column align-items-start">
+          <strong class="d-inline-block mb-2 text-success">Esportes</strong>
+          <h3 class="mb-0">
+            <a class="text-dark" href="#">Interclasse</a>
+          </h3>
+          <div class="mb-1 text-muted">22 de Out</div>
+          <p class="card-text mb-auto">Nos dias 26,27 e 28 os alunos disputam em 4 modalidades, Confira!</p>
+          <a href="#">Continue lendo</a>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+<h3 class="pb-3 mb-4 font-italic border-bottom">
+    Notícias Gerais
+</h3>
+  
+  {%for post in posts%}
+  <div class="blog-post">
+    <h2 class="blog-post-title">
+        <a href="/post/{{ post.pk }}">
+          <font color="#198754">
+          {{ post.Titulo }}
+          </font>
+        </a> 
+    </h2>
+    <p class="blog-post-meta">Escrito por <a href="#">{{ post.Autor.get_full_name }}</a>, {{ post.Data|date:'d, M Y' }}</p>
+
+    {{ post.Resumo|safe }}
+  {%endfor%}
+  
+  <nav class="blog-pagination">
+    <a class="btn btn-outline-primary" color="198754" href="#">Mais antigos</a>
+    <a class="btn btn-outline-secondary disabled" href="#">Mais novos</a>
+  </nav>
+{%endblock%}
